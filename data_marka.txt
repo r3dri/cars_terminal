@@ -1,0 +1,17 @@
+Lada/Granta/Vesta/Priora/Niva/Kalina/Largus
+Toyota/Camry/Corolla/Vista/Mark 2/Prius/Zola
+Honda/CR-V/Freed/Civic/Stepwgn
+Tesla/Model X/Model S/Model Y/Cybertruck
+Hello/МИР/World
+BMW/E60/E76/X3/X4/X5/X6/X7/M5
+Haval/E8/H2/M6
+Xiaomi/SU7
+ALOHADANCE
+Chevrolet/Camaro/El Camino/Lacetti/Aveo
+Subaru/Impreza/Outback/Legacy
+Skoda/Octavia/Rapid/Felicia
+Suzuki/Alto/Escudo/Every/Solio/Swift
+Renault/Logan/Clio/Duster/Arkana/Symbol
+Mercedes-Benz/S-Класс/GLE/CLA/GLK-Класс/G-Класс/X-Класс
+Mazda/3/6/Atenza/CX-3/CX-5/CX-7/Demio/Capella
+НОРМАЛЬ/ХУЯЛЬ
