@@ -5,14 +5,14 @@ columns = ['№', 'Производитель', 'Модель', 'Цвет', 'К�
 
 #Функции ↓ ↓ ↓ ↓ ↓ ↓
 def showdata(): #txt в таблицу
-    d=open('../../Desktop/cars/data_source.txt', 'r+', encoding='utf-8').readlines()
+    d=open('../../Desktop/cars_terminal/data_source.txt', 'r+', encoding='utf-8').readlines()
     r=[]
     for i in d:
         s=[x for x in i.split("/")]
         r.append(s)
     return r
 def find_num(): #нахождение последнего номера
-    d = open('../../Desktop/cars/data_source.txt', encoding='utf-8').readlines()
+    d = open('../../Desktop/cars_terminal/data_source.txt', encoding='utf-8').readlines()
     r=[]
     number=0
     for i in d:
@@ -30,8 +30,8 @@ def delete_car_func(x): # Удалить машину функция
     print("")
     number_for_delete = x
     os.system('clear')
-    d = open('../../Desktop/cars/data_source.txt', 'r+', encoding='utf-8').readlines()
-    file = open('../../Desktop/cars/data_source.txt', 'r+', encoding='utf-8')
+    d = open('../../Desktop/cars_terminal/data_source.txt', 'r+', encoding='utf-8').readlines()
+    file = open('../../Desktop/cars_terminal/data_source.txt', 'r+', encoding='utf-8')
     rdata = []
     for i in d:
         s = [x for x in i.split("/")]
@@ -46,11 +46,11 @@ def delete_car_func(x): # Удалить машину функция
     file.close()
     page_data()
 def showtask(x): #выводить список
-    d=open(f'../../Desktop/cars/data_{x}.txt', 'r+', encoding='utf-8').readlines()
+    d=open(f'../../Desktop/cars_terminal/data_{x}.txt', 'r+', encoding='utf-8').readlines()
     for i in d:
         print(i.strip())
 def showmarks(x): #выводим список моделей по производителю
-    d=open(f'../../Desktop/cars/data_marka.txt', 'r+', encoding='utf-8').readlines()
+    d=open(f'../../Desktop/cars_terminal/data_marka.txt', 'r+', encoding='utf-8').readlines()
     for i in d:
         s=[x.strip() for x in i.split("/")]
         if s[0]==x:
@@ -59,7 +59,7 @@ def showmarks(x): #выводим список моделей по произв�
 
 def add_mark_again(vvod_fabric):
     os.system('clear')
-    d = open(f'../../Desktop/cars/data_marka.txt', 'r+', encoding='utf-8').readlines()
+    d = open(f'../../Desktop/cars_terminal/data_marka.txt', 'r+', encoding='utf-8').readlines()
     r3 = [x for x in d]
     r4 = []
     count = 0
@@ -72,7 +72,7 @@ def add_mark_again(vvod_fabric):
                 count += 1
             r4.append('/'.join(s))
         if count == 0: r4.append(f'{vvod_fabric}/{vvod_marka2}')
-        file = open(f'../../Desktop/cars/data_marka.txt', 'r+', encoding='utf-8')
+        file = open(f'../../Desktop/cars_terminal/data_marka.txt', 'r+', encoding='utf-8')
         file.truncate(0)
         for i in r4:  # редачим файл
             file.write(f'{i}\n')
@@ -198,10 +198,10 @@ def page_data():  # Page 1.Список машин
 def add_car(): #Page 2. Добавить машину
     os.system('clear')
     num = find_num() + 1
-    d2 = open('../../Desktop/cars/data_source.txt', 'r+', encoding='utf-8').readlines()
-    file = open('../../Desktop/cars/data_source.txt', 'r+', encoding='utf-8')
-    data_proizvod=open('../../Desktop/cars/data_proizvod.txt', 'r+', encoding='utf-8')
-    data_marka=open('../../Desktop/cars/data_marka.txt', 'r+', encoding='utf-8').readlines()
+    d2 = open('../../Desktop/cars_terminal/data_source.txt', 'r+', encoding='utf-8').readlines()
+    file = open('../../Desktop/cars_terminal/data_source.txt', 'r+', encoding='utf-8')
+    data_proizvod=open('../../Desktop/cars_terminal/data_proizvod.txt', 'r+', encoding='utf-8')
+    data_marka=open('../../Desktop/cars_terminal/data_marka.txt', 'r+', encoding='utf-8').readlines()
     r=[]
     for i in data_proizvod:
         r.append(i.rstrip())
@@ -218,7 +218,7 @@ def add_car(): #Page 2. Добавить машину
                 r2=s
         if vvod_mark in r2:
             os.system('clear')
-            data_color=open('../../Desktop/cars/data_color.txt', 'r+', encoding='utf-8').readlines()
+            data_color=open('../../Desktop/cars_terminal/data_color.txt', 'r+', encoding='utf-8').readlines()
             r = []
             for i in data_color:
                 r.append(i.rstrip())
@@ -305,7 +305,23 @@ def add_car(): #Page 2. Добавить машину
                                 if vvod_data < 3:
                                     if vvod_data == 1: closeop = "Открыта"
                                     elif vvod_data == 2: closeop = "Закрыта"
-                                    car_string = f'{num}/{vvod_fabric}/{vvod_mark}/{vvod_color}/{KPP}/{privod}/{dvig}/{onoff}/{closeop}'  # новая строка
+				    os.system('clear')
+				    print("Фары горят/Не горят?:")
+				    print("1. Горят")
+				    print("2. Не горят")
+				    k = 0
+				    while k == 0:
+					try:
+					    vvod_data = int(input("Для выбора варианта введите его номер(1-2):"))
+					    k += 1
+					except:
+					    print("")
+				    if vvod_data < 3:
+					if vvod_data == 1:
+					    lights = "Фары горят"
+					elif vvod_data == 2:
+					    lights = "Фары не горят"
+                                    car_string = f'{num}/{vvod_fabric}/{vvod_mark}/{vvod_color}/{KPP}/{privod}/{dvig}/{onoff}/{closeop}/{lights}'  # новая строка
                                     for i in d2:
                                         file.write(str(i))
                                     file.write(f"{car_string}\n")
@@ -340,7 +356,7 @@ def delete_car(): #Page 3. Удалить машину
     os.system('clear')
     data = showdata()
     print(tabulate.tabulate(data, headers=columns, tablefmt='pipe'))  # таблица
-    d = open('../../Desktop/cars/data_source.txt', 'r+', encoding='utf-8').readlines()
+    d = open('../../Desktop/cars_terminal/data_source.txt', 'r+', encoding='utf-8').readlines()
     lines = len(d)
     print("")
     print("_______________________")
@@ -352,7 +368,7 @@ def delete_car(): #Page 3. Удалить машину
         except: print("")
     if number_for_delete<=lines:
         os.system('clear')
-        file = open('../../Desktop/cars/data_source.txt', 'r+', encoding='utf-8')
+        file = open('../../Desktop/cars_terminal/data_source.txt', 'r+', encoding='utf-8')
         rdata = []
         for i in d:
             s = [x for x in i.split("/")]
@@ -388,8 +404,8 @@ def change_car(): #Page 4. Редачить машину
     data=showdata()
     print(tabulate.tabulate(data, headers=columns, tablefmt='pipe')) #таблица
     print("")
-    d = open('../../Desktop/cars/data_source.txt', 'r+', encoding='utf-8').readlines()
-    d_proizvod = open('../../Desktop/cars/data_proizvod.txt', 'r+', encoding='utf-8').readlines()
+    d = open('../../Desktop/cars_terminal/data_source.txt', 'r+', encoding='utf-8').readlines()
+    d_proizvod = open('../../Desktop/cars_terminal/data_proizvod.txt', 'r+', encoding='utf-8').readlines()
     lines=len(d)
     print("_______________________")
     k = 0
@@ -421,10 +437,11 @@ def change_car(): #Page 4. Редачить машину
         print("7.Изменить тип двигателя")
         print("8.Изменить Заведена/Не заведена")
         print("9.Изменить Открыта/Закрыта")
+	print("10. Изменить Фары горят/не горят")
         k = 0
         while k == 0:  # проверка на буквы
             try:
-                vvod_data = int(input("Для выбора действия введите его номер(1-9):"))
+                vvod_data = int(input("Для выбора действия введите его номер(1-10):"))
                 k+=1
             except: print("")
         if vvod_data==1:
@@ -436,7 +453,7 @@ def change_car(): #Page 4. Редачить машину
             if vvod_fabric in rs:
                 os.system('clear')
                 showmarks(vvod_fabric)
-                data_marka = open('../../Desktop/cars/data_marka.txt', 'r+', encoding='utf-8').readlines()
+                data_marka = open('../../Desktop/cars_terminal/data_marka.txt', 'r+', encoding='utf-8').readlines()
                 vvod_mark = input(f"Выберите модели производителя {vvod_fabric}:")
                 r2 = []
                 for i in data_marka:
@@ -452,7 +469,7 @@ def change_car(): #Page 4. Редачить машину
                     rdata[number_for_change-1][1]=vvod_fabric
                     rdata[number_for_change - 1][2] = vvod_mark
                     os.system('clear')
-                    file = open('../../Desktop/cars/data_source.txt', 'r+', encoding='utf-8')
+                    file = open('../../Desktop/cars_terminal/data_source.txt', 'r+', encoding='utf-8')
                     s = ["/".join(x) for x in rdata]
                     for i in s:
                         file.write(str(i))
@@ -471,7 +488,7 @@ def change_car(): #Page 4. Редачить машину
             else: print("такого производителя нет",rs)
         elif vvod_data==3:
             os.system('clear')
-            d = open('../../Desktop/cars/data_source.txt', 'r+', encoding='utf-8').readlines()
+            d = open('../../Desktop/cars_terminal/data_source.txt', 'r+', encoding='utf-8').readlines()
             rdata = []
             for i in d:
                 r = []
@@ -479,7 +496,7 @@ def change_car(): #Page 4. Редачить машину
                 rdata.append(s)
             vvod_fabric=rdata[number_for_change-1][1]
             showmarks(vvod_fabric)
-            data_marka = open('../../Desktop/cars/data_marka.txt', 'r+', encoding='utf-8').readlines()
+            data_marka = open('../../Desktop/cars_terminal/data_marka.txt', 'r+', encoding='utf-8').readlines()
             vvod_mark = input(f"Выберите модель производителя {vvod_fabric}:")
             r2 = []
             for i in data_marka:
@@ -490,7 +507,7 @@ def change_car(): #Page 4. Редачить машину
                 rdata[number_for_change - 1][1] = vvod_fabric
                 rdata[number_for_change - 1][2] = vvod_mark
                 os.system('clear')
-                file = open('../../Desktop/cars/data_source.txt', 'r+', encoding='utf-8')
+                file = open('../../Desktop/cars_terminal/data_source.txt', 'r+', encoding='utf-8')
                 s = ["/".join(x) for x in rdata]
                 for i in s:
                     file.write(str(i))
@@ -527,20 +544,20 @@ def change_car(): #Page 4. Редачить машину
                     page_main()
         elif vvod_data==4:
             os.system('clear')
-            d = open('../../Desktop/cars/data_source.txt', 'r+', encoding='utf-8').readlines()
+            d = open('../../Desktop/cars_terminal/data_source.txt', 'r+', encoding='utf-8').readlines()
             rdata = []
             for i in d:
                 r = []
                 s = [x for x in i.split("/")]
                 rdata.append(s)
             showtask("color")
-            data_color = open('../../Desktop/cars/data_color.txt', 'r+', encoding='utf-8').readlines()
+            data_color = open('../../Desktop/cars_terminal/data_color.txt', 'r+', encoding='utf-8').readlines()
             r2=[x.strip() for x in data_color]
             vvod_color = input("Выберите цвет машины:")
             if vvod_color in r2:
                 rdata[number_for_change - 1][3] = vvod_color
                 os.system('clear')
-                file = open('../../Desktop/cars/data_source.txt', 'r+', encoding='utf-8')
+                file = open('../../Desktop/cars_terminal/data_source.txt', 'r+', encoding='utf-8')
                 s = ["/".join(x) for x in rdata]
                 for i in s:
                     file.write(str(i))
@@ -571,7 +588,7 @@ def change_car(): #Page 4. Редачить машину
                     k += 1
                 except:
                     print("")
-            d = open('../../Desktop/cars/data_source.txt', 'r+', encoding='utf-8').readlines()
+            d = open('../../Desktop/cars_terminal/data_source.txt', 'r+', encoding='utf-8').readlines()
             rdata = []
             for i in d:
                 r = []
@@ -583,7 +600,7 @@ def change_car(): #Page 4. Редачить машину
             elif vvod_data == 4: KPP = "Вариатор"
             rdata[number_for_change - 1][4] = KPP
             os.system('clear')
-            file = open('../../Desktop/cars/data_source.txt', 'r+', encoding='utf-8')
+            file = open('../../Desktop/cars_terminal/data_source.txt', 'r+', encoding='utf-8')
             s = ["/".join(x) for x in rdata]
             for i in s:
                 file.write(str(i))
@@ -611,7 +628,7 @@ def change_car(): #Page 4. Редачить машину
                     k += 1
                 except:
                     print("")
-            d = open('../../Desktop/cars/data_source.txt', 'r+', encoding='utf-8').readlines()
+            d = open('../../Desktop/cars_terminal/data_source.txt', 'r+', encoding='utf-8').readlines()
             rdata = []
             for i in d:
                 r = []
@@ -622,7 +639,7 @@ def change_car(): #Page 4. Редачить машину
             elif vvod_data == 3:privod = "Полный"
             rdata[number_for_change - 1][5] = privod
             os.system('clear')
-            file = open('../../Desktop/cars/data_source.txt', 'r+', encoding='utf-8')
+            file = open('../../Desktop/cars_terminal/data_source.txt', 'r+', encoding='utf-8')
             s = ["/".join(x) for x in rdata]
             for i in s:
                 file.write(str(i))
@@ -652,7 +669,7 @@ def change_car(): #Page 4. Редачить машину
                     k += 1
                 except:
                     print("")
-            d = open('../../Desktop/cars/data_source.txt', 'r+', encoding='utf-8').readlines()
+            d = open('../../Desktop/cars_terminal/data_source.txt', 'r+', encoding='utf-8').readlines()
             rdata = []
             for i in d:
                 r = []
@@ -665,7 +682,7 @@ def change_car(): #Page 4. Редачить машину
             elif vvod_data == 5: dvig = "Гибридный"
             rdata[number_for_change - 1][6] = dvig
             os.system('clear')
-            file = open('../../Desktop/cars/data_source.txt', 'r+', encoding='utf-8')
+            file = open('../../Desktop/cars_terminal/data_source.txt', 'r+', encoding='utf-8')
             s = ["/".join(x) for x in rdata]
             for i in s:
                 file.write(i)
@@ -692,7 +709,7 @@ def change_car(): #Page 4. Редачить машину
                     k += 1
                 except:
                     print("")
-            d = open('../../Desktop/cars/data_source.txt', 'r+', encoding='utf-8').readlines()
+            d = open('../../Desktop/cars_terminal/data_source.txt', 'r+', encoding='utf-8').readlines()
             rdata = []
             for i in d:
                 r = []
@@ -702,7 +719,7 @@ def change_car(): #Page 4. Редачить машину
             elif vvod_data == 2: onoff = "Не заведена"
             rdata[number_for_change - 1][7] = onoff
             os.system('clear')
-            file = open('../../Desktop/cars/data_source.txt', 'r+', encoding='utf-8')
+            file = open('../../Desktop/cars_terminal/data_source.txt', 'r+', encoding='utf-8')
             s = ["/".join(x) for x in rdata]
             for i in s:
                 file.write(i)
@@ -729,7 +746,7 @@ def change_car(): #Page 4. Редачить машину
                     k += 1
                 except:
                     print("")
-            d = open('../../Desktop/cars/data_source.txt', 'r+', encoding='utf-8').readlines()
+            d = open('../../Desktop/cars_terminal/data_source.txt', 'r+', encoding='utf-8').readlines()
             rdata = []
             for i in d:
                 r = []
@@ -738,7 +755,7 @@ def change_car(): #Page 4. Редачить машину
             if vvod_data == 1:   closeop = "Открыта"
             elif vvod_data == 2: closeop = "Закрыта"
             rdata[number_for_change - 1][8]=closeop
-            file = open('../../Desktop/cars/data_source.txt', 'r+', encoding='utf-8')
+            file = open('../../Desktop/cars_terminal/data_source.txt', 'r+', encoding='utf-8')
             s = ["/".join(x) for x in rdata]
             for i in s:
                 file.write(i)
@@ -754,6 +771,45 @@ def change_car(): #Page 4. Редачить машину
                 page_main()
             elif vvod_data3 == 2:
                 change_car()
+	elif vvod_data == 10:
+	    os.system('clear')
+	    print("Фары горят/Не горят?:")
+	    print("1. Фары горят")
+	    print("2. Фары не горят")
+	    k = 0
+	    while k == 0:
+		try:
+		    vvod_data = int(input("Для выбора варианта введите его номер (1-2):"))
+		    k += 1
+		except:
+		    print("")
+	    d = open('../../Dekstop/cars_terminal/data_source.txt', 'r+', encoding='utf-8').readlines()
+	    rdata = []
+	    for i in d:
+		r = []
+		s = [x for x in i.split("/")]
+		rdata.append(s)
+	    if vvod_data == 1:
+		lights = "Фары горят"
+	    elif vvod_data == 2:
+		lights = "Фары не горят"
+	    rdata[number_for_change - 1][9] = lights
+	    for open('../../Dekstop/cars_terminal/data_source.txt', 'r+', encoding='utf-8')
+	    s = ["/".join(x) for x in rdata]
+	    for i in s:
+		file.write(i)
+	    file.close()
+	    os.system('clear')
+	    print("Успешно")
+	    print("___________________")
+	    print("1. Вернуться на главную")
+	    print("2. Повторная замена")
+	    vvod_data3 = int(input("Для выбора действия введите его номер(1-2):"))
+	    if vvod_data3 == 1:
+		os.system('clear')
+		page_main()
+	    elif vvod_data3 == 2:
+		change_car()
         else:
             os.system('clear')
             change_car()
@@ -779,7 +835,7 @@ def change_car(): #Page 4. Редачить машину
             page_main()
 def find_car(): #Page 5. Найти машину
     os.system('clear')
-    d = open('../../Desktop/cars/data_source.txt', 'r+', encoding='utf-8').readlines()
+    d = open('../../Desktop/cars_terminal/data_source.txt', 'r+', encoding='utf-8').readlines()
     lines = len(d)
     k = 0
     while k == 0:  # проверка на буквы
@@ -877,10 +933,10 @@ def listtask(x):
     elif vvod_data3 == 2:
         os.system('clear')
         s=input(f"Введите {r2[x-1]} для добавления: ")
-        d=open(f'../../Desktop/cars/data_{r[x-1]}.txt', 'r+', encoding='utf-8').readlines()
+        d=open(f'../../Desktop/cars_terminal/data_{r[x-1]}.txt', 'r+', encoding='utf-8').readlines()
         r3=[x for x in d]
         r3.append(f'{s}\n')
-        file = open(f'../../Desktop/cars/data_{r[x-1]}.txt', 'r+', encoding='utf-8')
+        file = open(f'../../Desktop/cars_terminal/data_{r[x-1]}.txt', 'r+', encoding='utf-8')
         file.truncate(0)
         for i in r3:  # редачим файл
             file.write(i)
@@ -888,10 +944,10 @@ def listtask(x):
     elif vvod_data3 == 3:
         os.system('clear')
         s = input(f"Введите {r2[x - 1]} для удаления: ")
-        d = open(f'../../Desktop/cars/data_{r[x - 1]}.txt', 'r+', encoding='utf-8').readlines()
+        d = open(f'../../Desktop/cars_terminal/data_{r[x - 1]}.txt', 'r+', encoding='utf-8').readlines()
         r3 = [x for x in d]
         r3.remove(f'{s}\n')
-        file = open(f'../../Desktop/cars/data_{r[x - 1]}.txt', 'r+', encoding='utf-8')
+        file = open(f'../../Desktop/cars_terminal/data_{r[x - 1]}.txt', 'r+', encoding='utf-8')
         file.truncate(0)
         for i in r3:  # редачим файл
             file.write(i)
@@ -922,7 +978,7 @@ def listtask(x):
 
 def listmarks():
     os.system('clear')
-    d = open(f'../../Desktop/cars/data_proizvod.txt', 'r+', encoding='utf-8').readlines()
+    d = open(f'../../Desktop/cars_terminal/data_proizvod.txt', 'r+', encoding='utf-8').readlines()
     r3=[]
     for i in d:
         r3.append(i)
@@ -952,7 +1008,7 @@ def listmarks():
                 add_mark_again(vvod_fabric)
         elif vvod_data3==3:
             os.system('clear')
-            d = open(f'../../Desktop/cars/data_marka.txt', 'r+', encoding='utf-8').readlines()
+            d = open(f'../../Desktop/cars_terminal/data_marka.txt', 'r+', encoding='utf-8').readlines()
             r3 = [x for x in d]
             r4 = []
             print(f"Модели производителя {vvod_fabric}:")
@@ -963,7 +1019,7 @@ def listmarks():
                 if vvod_marka2 in s:
                     s.remove(vvod_marka2)
                 r4.append('/'.join(s))
-            file = open(f'../../Desktop/cars/data_marka.txt', 'r+', encoding='utf-8')
+            file = open(f'../../Desktop/cars_terminal/data_marka.txt', 'r+', encoding='utf-8')
             file.truncate(0)
             for i in r4:  # редачим файл
                 file.write(f'{i}\n')
